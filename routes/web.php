@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,5 +28,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+route::get('/restaurants/{restaurant:name}', [RestaurantController::class, 'show'])
+    ->name('restaurant.show')
+    ->scopeBindings();
 
 require __DIR__.'/auth.php';
